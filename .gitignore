@@ -1,7 +1,6 @@
-# all dotenv files
+# all dot env files
 *.env
 # all node_modules
-node_modules
-# all .DS_Store files
+*node_modules
+# DS_Store files
 .DS_Store
-
