@@ -38,15 +38,15 @@ export function InstructionFactory(sequelize: Sequelize): typeof Instruction {
                 }
             },
             ingredients: {
-                type: DataTypes.ARRAY(DataTypes.STRING),
+                type: DataTypes.JSON,
                 allowNull: false,
             },
             readyInMinutes: {
-                type: DataTypes.NUMBER,
+                type: DataTypes.INTEGER,
                 allowNull: false,
             },
             servings: {
-                type: DataTypes.NUMBER,
+                type: DataTypes.INTEGER,
                 allowNull: false,
             },
             instructions: {
@@ -59,6 +59,5 @@ export function InstructionFactory(sequelize: Sequelize): typeof Instruction {
             sequelize,
         }
     );
-
     return Instruction;
 }
