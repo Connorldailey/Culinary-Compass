@@ -5,8 +5,6 @@ interface RecipeAttributes {
     recipeId: number;
     title: string;
     image: string;
-    userId: number;
-    category: 'try-it' | 'favorite';
 }
 
 interface RecipeCreationAttributes extends Optional<RecipeAttributes, 'id'> {}
@@ -16,8 +14,6 @@ export class Recipe extends Model<RecipeAttributes, RecipeCreationAttributes> im
     public recipeId!: number;
     public title!: string;
     public image!: string;
-    public userId!: number;
-    public category!: 'try-it' | 'favorite';
 }
 
 export function RecipeFactory(sequelize: Sequelize): typeof Recipe {
@@ -31,6 +27,7 @@ export function RecipeFactory(sequelize: Sequelize): typeof Recipe {
             recipeId: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
+                unique: true,
             },
             title: {
                 type: DataTypes.STRING,
@@ -39,21 +36,15 @@ export function RecipeFactory(sequelize: Sequelize): typeof Recipe {
             image: {
                 type: DataTypes.STRING,
                 allowNull: false,
-            },
-            userId: {
-                type: DataTypes.INTEGER,
-                allowNull: false,
-            },
-            category: {
-                type: DataTypes.ENUM('try-it', 'favorite'),
-                allowNull: false,
+                validate: {
+                    isUrl: true,
+                },
             },
         },
         {
-            tableName: 'recipe',
+            tableName: 'recipes',
             sequelize,
         }
     );
-
     return Recipe;
 }
