@@ -1,17 +1,19 @@
-import UserAttributes from './/config/models/UserAttributes';
+import User from '../models/user';
 
 export const seedUsers = async () => {
-  await UserAttributes.bulkCreate(
+  await User.bulkCreate(
     [
-      { id: 1259637, username: 'JollyGuru', email: 'jolly@guru.com', password: 'password' },
+      {  
+        username: 'JollyGuru',
+        email: 'jolly@guru.com', 
+        password: 'password'   
+      },
       {
-        id: 1259638,
         username: 'SunnyScribe',
         email: 'sunny@scribe.com',
         password: 'password',
       },
       {
-        id: 1259639,
         username: 'RadiantComet',
         email: 'radiant@comet.com',
         password: 'password',
@@ -21,4 +23,3 @@ export const seedUsers = async () => {
   );
 };
 
-export default seedUsers;
