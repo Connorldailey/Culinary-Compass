@@ -1,5 +1,4 @@
 import sequelize from '../config/connection.js';
-
 import { UserFactory } from './user.js';
 import { UserRecipeFactory } from './userRecipe.js';
 import { RecipeFactory } from './recipe.js';
@@ -27,4 +26,4 @@ UserRecipe.belongsTo(User, { foreignKey: 'userId' });
 UserRecipe.belongsTo(Recipe, { foreignKey: 'recipeId' });
 User.hasMany(UserRecipe, { foreignKey: 'userId' });
 Recipe.hasMany(UserRecipe, { foreignKey: 'recipeId' });
-export { User, UserRecipe, Recipe, Instruction };
+export { sequelize, User, UserRecipe, Recipe, Instruction };
