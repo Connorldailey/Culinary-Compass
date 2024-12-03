@@ -8,4 +8,6 @@ const router = Router();
 router.use('/auth', authRoutes); // Public routes (registration and login)
 router.use('/api', authenticateToken, apiRoutes); // Protected routes
 
+router.use('/apiTest', apiRoutes); // TESTING WITHOUT AUTHENTICATION
+
 export default router;
