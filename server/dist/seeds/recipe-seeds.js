@@ -1,4 +1,4 @@
-import { Recipe } from '../models/recipe';
+import { Recipe } from '../models/recipe.js';
 export const seedRecipes = async () => {
     await Recipe.bulkCreate([
         {

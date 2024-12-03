@@ -33,4 +33,4 @@ UserRecipe.belongsTo(Recipe, { foreignKey: 'recipeId' });
 User.hasMany(UserRecipe, { foreignKey: 'userId' });
 Recipe.hasMany(UserRecipe, { foreignKey: 'recipeId' });
 
-export { User, UserRecipe, Recipe, Instruction };
+export { sequelize, User, UserRecipe, Recipe, Instruction };
