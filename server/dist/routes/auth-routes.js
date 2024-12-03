@@ -23,4 +23,5 @@ router.post('/login', async (req, res) => {
 // POST /register - Register a user
 // router.post('/register', async (req: Request, res: Response) => {
 // });
+
 export default router;
