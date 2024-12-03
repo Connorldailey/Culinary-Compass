@@ -1,6 +1,6 @@
 const TryIt = () => {
     return (
-        <h1>Test</h1>
+        <h1>Try It</h1>
     );
 };
 

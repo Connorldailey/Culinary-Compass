@@ -4,18 +4,28 @@ import auth from '../utils/auth';
 const Search = () => {
     const [ loginCheck, setLoginCheck ] = useState(false);
 
-    const checkLogin = () => {
-        if(auth.loggedIn()) {
-            setLoginCheck(true);
-        }
-    };
-
     useEffect(() => {
-        checkLogin();
-    }, [loginCheck])
+        setLoginCheck(auth.loggedIn());
+      }, []);
 
     return (
-        <h1>Test</h1>
+        <>
+            {
+                !loginCheck? (
+                    <div className='login-notice-wrapper'>
+                        <div className='login-notice'>
+                            <h1>
+                                Sign Up or Login to start cooking!
+                            </h1>
+                        </div>
+                    </div>
+                ) : (
+                    <div className='search-content'>
+                        <h1>Search</h1>
+                    </div>
+                )
+            }
+        </>
     );
 };
 

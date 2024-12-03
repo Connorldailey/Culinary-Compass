@@ -52,7 +52,7 @@ const Navbar = () => {
                             ) : (
                                 <>
                                     <li className='nav-item'>
-                                        <Link className='nav-link btn btn-outline-primary me-2' to='/search'>Search</Link>
+                                        <Link className='nav-link btn me-2' to='/'>Search</Link>
                                     </li>
                                     <li className='nav-item'>
                                         <Link className='nav-link btn me-2' to='/try-it'>Try-It</Link>
@@ -61,14 +61,16 @@ const Navbar = () => {
                                         <Link className='nav-link btn me-2' to='/favorites'>favorites</Link>
                                     </li>
                                     <li className='nav-item'>
-                                        <button 
-                                            className='btn btn-outline-danger' 
-                                            onClick={() => {
+                                        <a 
+                                            href='#' 
+                                            className='nav-link btn btn-outline-danger me-2' 
+                                            onClick={(e) => {
+                                                e.preventDefault();
                                                 auth.logout();
                                             }}
                                         >
                                             Logout
-                                        </button>
+                                        </a>
                                     </li>
                                 </>
                             )

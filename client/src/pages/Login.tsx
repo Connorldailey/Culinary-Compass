@@ -10,13 +10,15 @@ const Login = () => {
         username: '',
         password: '',
     });
+    const [errorMessage, setErrorMessage] = useState('');
 
     const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
         setLoginData({
             ...loginData,
             [name]: value
-        })
+        });
+        setErrorMessage('');
     }
 
     const handleSubmit = async (e: FormEvent) => {
@@ -26,6 +28,7 @@ const Login = () => {
             Auth.login(data.token);
         } catch (error) {
             console.error('Failed to login:', error);
+            setErrorMessage('Invalid username or password.');
         }
     }
 
@@ -42,6 +45,7 @@ const Login = () => {
                         className='form-control' 
                         value={loginData.username || ''}
                         onChange={handleChange}
+                        required
                     />
                 </div>
                 <div className='mb-3'>
@@ -53,8 +57,14 @@ const Login = () => {
                         className='form-control' 
                         value={loginData.password || ''}
                         onChange={handleChange}
+                        required
                     />
                 </div>
+                {errorMessage && (
+                    <div className='alert alert-danger' role='alert'>
+                        {errorMessage}
+                    </div>
+                )}
                 <button type='submit' className='btn btn-primary'>Login</button>
             </form>
         </div>

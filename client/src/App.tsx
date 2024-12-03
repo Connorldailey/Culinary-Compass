@@ -3,9 +3,9 @@ import Navbar from './components/Navbar';
 
 function App() {
   return (
-    <div className=''>
+    <div className='page-container'>
       <Navbar />
-      <main>
+      <main className='main-content p-3'>
         <Outlet />
       </main>
     </div>
