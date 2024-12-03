@@ -1,5 +1,5 @@
 -- DROP DATABASE
-DROP DATABASE IF EXISTS recipe_db;
+DROP DATABASE IF EXISTS culinary_compass_db;
 
 -- CREATE DATABASE
-CREATE DATABASE recipe_db;
+CREATE DATABASE culinary_compass_db;
