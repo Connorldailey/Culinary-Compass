@@ -11,6 +11,9 @@ interface UserAttributes {
 interface UserCreationAttributes extends Optional<UserAttributes, 'id'> {}
 
 export class User extends Model<UserAttributes, UserCreationAttributes> implements UserAttributes {
+    static findById(_userId: any) {
+        throw new Error('Method not implemented.');
+    }
     public id!: number;
     public username!: string;
     public email!: string;
@@ -18,6 +21,7 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
     
     public readonly createdAt!: Date;
     public readonly updatedAt!: Date;
+    recipes: any;
 
     public async setPassword(password: string) {
         const saltRounds = 10;

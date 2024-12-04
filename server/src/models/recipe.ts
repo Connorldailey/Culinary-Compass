@@ -10,6 +10,9 @@ interface RecipeAttributes {
 interface RecipeCreationAttributes extends Optional<RecipeAttributes, 'id'> {}
 
 export class Recipe extends Model<RecipeAttributes, RecipeCreationAttributes> implements RecipeAttributes {
+    static findById(_recipeId: any) {
+        throw new Error('Method not implemented.');
+    }
     public id!: number;
     public recipeId!: number;
     public title!: string;
