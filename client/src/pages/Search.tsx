@@ -1,13 +1,21 @@
 import { useEffect, useState, FormEvent, ChangeEvent } from 'react';
+
 import auth from '../utils/auth';
-import { search } from '../api/recipeAPI';
-import { RecipeData } from '../interfaces/RecipeData';
+
+import { search, addRecipeToList } from '../api/recipeAPI';
+
+import { RecipeData, AddRecipeData } from '../interfaces/RecipeData';
+
 import SearchCard from '../components/SearchCard';
+import MessageModal from '../components/MessageModal';
 
 const Search = () => {
     const [ loginCheck, setLoginCheck ] = useState<boolean>(false);
     const [ searchData, setSearchData ] = useState<string>('');
     const [ results, setResults ] = useState<RecipeData[]>([]);
+    const [ errorMessage, setErrorMessage ] = useState<string>('');
+    const [ message, setMessage ] = useState<string>('');
+    const [showModal, setShowModal] = useState<boolean>(false);
 
     useEffect(() => {
         setLoginCheck(auth.loggedIn());
@@ -16,18 +24,62 @@ const Search = () => {
     const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { value } = e.target;
         setSearchData(value);
-    }
+        setErrorMessage('');
+    };
 
+    // Handle form submit for recipe search
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
+        // Prevent empty searches
+        if (!searchData.trim()) {
+            setErrorMessage('Please enter a search query.');
+            setResults([]);
+            return;
+        }
         try {
             const data = await search(searchData);
-            setResults(data);
-            console.log(data); // Testing
-        } catch {
-            console.error('Search failed.');
+            if (data.length > 0) {
+                setResults(data);
+                console.log(data); // Testing
+                return;
+            }
+            throw new Error('No data found.')
+        } catch (error) {
+            setResults([]);
+            setErrorMessage('We could not find what you were looking for. Please try again.')
+            console.error('Search failed.', error);
         }
-    }
+    };
+
+    // Add recipe to try it list
+    const addToList = async (recipe: RecipeData, category: string) => {
+        try {
+            const recipeData: AddRecipeData = {
+                recipeId: recipe.id,
+                category: category,
+            }
+            const data = await addRecipeToList(recipeData);
+
+            // Display success message
+            const listName = category === 'favorite' ? 'favorites' : 'try it';
+            setMessage(`Added to ${listName} list.`);
+            setShowModal(true);
+            // Close the modal after 3 seconds
+            setTimeout(() => {
+                setShowModal(false);
+            }, 3000);
+
+            console.log(`Recipe added to ${category} list.`, data);
+        } catch (error) {
+            console.error('Failed to add recipe to list:', error);
+            setMessage(`Recipe already in ${category === 'favorite' ? 'favorites' : 'try it'} list.`);
+            setShowModal(true);
+
+            setTimeout(() => {
+                setShowModal(false);
+            }, 3000);
+        }
+    };
 
     return (
         <>
@@ -42,9 +94,9 @@ const Search = () => {
                     </div>
                 ) : (
                     <div className='search-content'>
-                        <h1>Search</h1>
+                        <h1 className='mb-3'>Search</h1>
                         <div className='container mb-3'>
-                            <form onSubmit={handleSubmit} className='d-flex'>
+                            <form onSubmit={handleSubmit} className='d-flex mb-3'>
                                 <input
                                     type='text'
                                     id='searchInput'
@@ -55,9 +107,18 @@ const Search = () => {
                                 />
                                 <button type='submit' className='btn btn-primary'>Search</button>
                             </form>
+                            {errorMessage && (
+                                <div className='alert alert-danger' role='alert'>
+                                    {errorMessage}
+                                </div>
+                            )}
                         </div>
                         <div className='container'>
-                            <SearchCard data={results}/>
+                            <SearchCard 
+                                data={results}
+                                addToList={addToList}
+                            />
+                            {showModal && <MessageModal message={message} />}
                         </div>
                     </div>
                 )

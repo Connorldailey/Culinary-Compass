@@ -36,6 +36,7 @@ export function InstructionFactory(sequelize) {
     }, {
         tableName: 'instructions',
         sequelize,
+        timestamps: false,
     });
     return Instruction;
 }

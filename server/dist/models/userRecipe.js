@@ -3,9 +3,13 @@ export class UserRecipe extends Model {
 }
 export function UserRecipeFactory(sequelize) {
     UserRecipe.init({
+        id: {
+            type: DataTypes.INTEGER,
+            autoIncrement: true,
+            primaryKey: true,
+        },
         userId: {
             type: DataTypes.INTEGER,
-            primaryKey: true,
             allowNull: false,
             references: {
                 model: 'users',
@@ -15,7 +19,6 @@ export function UserRecipeFactory(sequelize) {
         },
         recipeId: {
             type: DataTypes.INTEGER,
-            primaryKey: true,
             allowNull: false,
             references: {
                 model: 'recipes',
@@ -29,7 +32,14 @@ export function UserRecipeFactory(sequelize) {
         },
     }, {
         tableName: 'user_recipes',
+        timestamps: false,
         sequelize,
+        indexes: [
+            {
+                unique: true,
+                fields: ['userId', 'recipeId', 'category'],
+            },
+        ],
     });
     return UserRecipe;
 }

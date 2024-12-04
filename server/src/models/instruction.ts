@@ -57,6 +57,7 @@ export function InstructionFactory(sequelize: Sequelize): typeof Instruction {
         {
             tableName: 'instructions',
             sequelize,
+            timestamps: false,
         }
     );
     return Instruction;
