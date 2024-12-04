@@ -27,3 +27,14 @@ html, body {
 .login-notice {
     text-align: center;
 }
+
+.card-image {
+    width: 150px;
+    height: auto;
+    border-radius: 10px;
+}
+
+.recipe-card {
+    border: 2px solid black;
+    border-radius: 10px;
+}
