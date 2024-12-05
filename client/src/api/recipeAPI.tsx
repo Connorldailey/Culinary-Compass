@@ -43,14 +43,19 @@ const addRecipeToList = async (recipeData: AddRecipeData) => {
             body: JSON.stringify(recipeData)
         });
 
-        // Throw error if response is not OK
-        if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(`Error: ${errorData.message}`);
-        }
-
         // Parse the response body as JSON
         const data = await response.json();
+
+        // Throw error if response is not OK
+        if (!response.ok) {
+            // Handle specific conflict error (recipe already exists)
+            if (response.status === 409) {
+                return {
+                    message: data.message,
+                }
+            }
+            throw new Error(`Error: ${data.message}`);
+        }
 
         // Return the data received from the server
         return data;
