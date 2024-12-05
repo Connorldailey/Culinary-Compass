@@ -27,6 +27,7 @@ export function RecipeFactory(sequelize) {
     }, {
         tableName: 'recipes',
         sequelize,
+        timestamps: false,
     });
     return Recipe;
 }

@@ -44,6 +44,7 @@ export function RecipeFactory(sequelize: Sequelize): typeof Recipe {
         {
             tableName: 'recipes',
             sequelize,
+            timestamps: false,
         }
     );
     return Recipe;

@@ -2,7 +2,8 @@ import type { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 
 interface JwtPayload {
-  username: string;
+    id: number;
+    username: string;
 }
 
 export const authenticateToken = (
@@ -17,12 +18,12 @@ export const authenticateToken = (
 
         const secretKey = process.env.JWT_SECRET_KEY || '';
 
-        jwt.verify(token, secretKey, (err, user) => {
+        jwt.verify(token, secretKey, (err, decoded) => {
             if (err) {
                 return res.sendStatus(403); // Forbidden
             }
 
-            req.user = user as JwtPayload;
+            req.user = decoded as JwtPayload;
             return next();
         });
     } else {
