@@ -51,30 +51,44 @@ const Search = () => {
         }
     };
 
-    // Add recipe to try it list
+    // Add recipe to list
     const addToList = async (recipe: RecipeData, category: string) => {
         try {
             const recipeData: AddRecipeData = {
                 recipeId: recipe.id,
                 category: category,
             }
-            const data = await addRecipeToList(recipeData);
+            const response = await addRecipeToList(recipeData);
 
-            // Display success message
+            // Set response status message
             const listName = category === 'favorite' ? 'favorites' : 'try it';
-            setMessage(`Added to ${listName} list.`);
+            let modalMessage = 'Failed to add the recipe. Please try again later.';
+            if (response && response.message === 'Recipe added successfully.') {
+                // Successfully added to list
+                modalMessage = `Added to ${listName} list.`;
+                console.log(`Recipe added to ${listName} list.`, response);
+            } else if (response && response.message.includes('already exists')) {
+                // Recipe already exists in the list
+                modalMessage = `Already in ${listName} list.`
+                console.log(`Recipe already in ${listName} list.`, response);
+            } else {
+                console.log(`Failed to add the recipe.`, response);
+            }
+
+            // Show modal with the message
+            setMessage(modalMessage);
             setShowModal(true);
-            // Close the modal after 3 seconds
             setTimeout(() => {
                 setShowModal(false);
             }, 3000);
 
-            console.log(`Recipe added to ${category} list.`, data);
         } catch (error) {
             console.error('Failed to add recipe to list:', error);
-            setMessage(`Recipe already in ${category === 'favorite' ? 'favorites' : 'try it'} list.`);
+            
+            // Show modal with error message
+            const errorMsg = 'Server error. Please try again later.';
+            setMessage(errorMsg)
             setShowModal(true);
-
             setTimeout(() => {
                 setShowModal(false);
             }, 3000);
