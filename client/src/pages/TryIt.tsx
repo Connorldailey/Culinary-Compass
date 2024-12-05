@@ -37,27 +37,38 @@ const TryIt = () => {
     }, [loginCheck, getRecipes]);
 
     const addToFavorites = async (recipe: UserRecipeData) => {
-        console.log('Recipe object received:', recipe);
         try {
             const recipeData: AddRecipeData = {
                 recipeId: recipe.recipeId,
                 category: 'favorite',
             }
-            console.log('Recipe data to be added:', recipeData);
-            const data = await addRecipeToList(recipeData);
+            const response = await addRecipeToList(recipeData);
 
-            // Display success message
-            setMessage(`Added to favorites list.`);
+            // Set response status message
+            let modalMessage = 'Failed to add the recipe. Please try again later.';
+            if (response && response.message === 'Recipe added successfully.') {
+                // Successfully added to list
+                modalMessage = 'Added to favorites list.';
+                console.log('Recipe added to favorites list.', response);
+            } else if (response && response.message.includes('already exists')) {
+                // Recipe already exists in the list
+                modalMessage = 'Already in favorites list.';
+                console.log(`Recipe already in favorites list.`, response);
+            } else {
+                console.log(`Failed to add the recipe.`, response);
+            }
+
+            // Show modal with the message
+            setMessage(modalMessage);
             setShowModal(true);
-            // Close the modal after 3 seconds
             setTimeout(() => {
                 setShowModal(false);
             }, 3000);
 
-            console.log(`Recipe added to favorites list.`, data);
         } catch (error) {
-            console.error('Failed to add recipe to list:', error);
-            setMessage(`Recipe already in favorites list.`);
+            console.error('Failed to add recipe.', error);
+
+            setMessage('Server error. Please try again later.');
             setShowModal(true);
 
             setTimeout(() => {
@@ -80,17 +91,18 @@ const TryIt = () => {
 
                 return updatedResults;
             });
-            setMessage('Recipe successfully deleted');
+            setMessage('Recipe successfully deleted.');
             setShowModal(true);
 
             setTimeout(() => {
                 setShowModal(false);
             }, 3000);
 
-            console.log('Recipe added to try it list.');
+            console.log('Recipe removed from try it list.')
+
         } catch (error) {
             console.error('Failed to delete recipe from try it list:', error);
-            setMessage('Failed to delete recipe');
+            setMessage('Failed to delete recipe.');
             setShowModal(true);
 
             setTimeout(() => {

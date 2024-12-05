@@ -45,14 +45,14 @@ const Favorites = () => {
 
                 return updatedResults;
             });
-            setMessage('Recipe successfully deleted');
+            setMessage('Recipe successfully deleted.');
             setShowModal(true);
 
             setTimeout(() => {
                 setShowModal(false);
             }, 3000);
 
-            console.log('Recipe removed to favorites list.');
+            console.log('Recipe removed from favorites list.');
         } catch (error) {
             console.error('Failed to delete recipe from favorites list:', error);
             setMessage('Failed to delete recipe');

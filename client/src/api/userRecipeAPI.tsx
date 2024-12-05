@@ -25,7 +25,7 @@ const getUserRecipes = async (category: string) => {
         return data;
     } catch (error) {
         console.log('Error from get user recipes:', error);
-        return Promise.reject('Could not get user recipes');
+        return Promise.reject('Could not get user recipes.');
     }
 }
 
@@ -47,7 +47,7 @@ const deleteUserRecipe = async (userRecipeId: number) => {
             throw new Error(`Error: ${errorData.message}`);
         }
 
-        console.log('Recipe successfully deleted');
+        console.log('Recipe successfully deleted.');
     } catch (error) {
         console.error('Failed to delete recipe:', error);
     }
