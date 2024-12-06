@@ -43,10 +43,16 @@ export const searchRecipes = async (req: Request, res: Response) => {
 };
 
 export const addRecipeToList = async (req: Request, res: Response) => {
-    const { recipeId, userId, category } = req.body;
+    const { recipeId, category } = req.body;
 
-    if (!recipeId || !userId || !category) {
-        return res.status(400).json({ message: 'recipeId, userId, and category are required.' });
+    if (!recipeId || !category) {
+        return res.status(400).json({ message: 'recipeId and category are required.' });
+    }
+
+    const userId = req.user?.id;
+
+    if (!userId) {
+        return res.status(401).json({ message: 'User not authenticated.' });
     }
 
     try {
@@ -72,6 +78,21 @@ export const addRecipeToList = async (req: Request, res: Response) => {
                 readyInMinutes,
                 servings,
                 instructions,
+            });
+        }
+
+        // Check if the user has already added this recipe to the specified category
+        const existingUserRecipe = await UserRecipe.findOne({
+            where: {
+                userId,
+                recipeId: recipe.id,
+                category,
+            },
+        });
+
+        if (existingUserRecipe) {
+            return res.status(409).json({
+                message: `Recipe already exists in your ${category} list.`,
             });
         }
 

@@ -18,7 +18,7 @@ router.post('/login', async (req, res) => {
         return res.status(401).json({ message: 'Authentication failed' });
     }
     const secretKey = process.env.JWT_SECRET_KEY || '';
-    const token = jwt.sign({ username }, secretKey, { expiresIn: '1h' });
+    const token = jwt.sign({ id: user.id, username: username }, secretKey, { expiresIn: '1h' });
     return res.json({ token });
 });
 // POST /register - Register a user
@@ -35,12 +35,10 @@ router.post('/register', async (req, res) => {
         if (existingUser) {
             return res.status(400).json({ message: 'Username or email already exists.' });
         }
-        const saltRounds = 10;
-        const hashedPassword = await bcrypt.hash(password, saltRounds);
         const newUser = new User({
             username,
             email,
-            password: hashedPassword,
+            password: password,
         });
         await newUser.save();
         const token = jwt.sign({ id: newUser.id, email: newUser.email }, process.env.JWT_SECRET_KEY, { expiresIn: process.env.JWT_EXPIRES_IN || '1h' });
