@@ -66,7 +66,7 @@ const TryIt = () => {
             setShowModal(true);
             setTimeout(() => {
                 setShowModal(false);
-            }, 3000);
+            }, 2000);
 
         } catch (error) {
             console.error('Failed to add recipe.', error);
@@ -76,7 +76,7 @@ const TryIt = () => {
 
             setTimeout(() => {
                 setShowModal(false);
-            }, 3000);
+            }, 2000);
         }
     }
 
@@ -99,7 +99,7 @@ const TryIt = () => {
 
             setTimeout(() => {
                 setShowModal(false);
-            }, 3000);
+            }, 2000);
 
             console.log('Recipe removed from try it list.')
 
@@ -110,7 +110,7 @@ const TryIt = () => {
 
             setTimeout(() => {
                 setShowModal(false);
-            }, 3000);
+            }, 2000);
         }
     }
 
