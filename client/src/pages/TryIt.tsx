@@ -1,4 +1,5 @@
 import { useEffect, useState, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import auth from '../utils/auth';
 import { getUserRecipes, deleteUserRecipe } from '../api/userRecipeAPI';
 import { addRecipeToList } from '../api/recipeAPI';
@@ -13,6 +14,8 @@ const TryIt = () => {
     const [ errorMessage, setErrorMessage ] = useState<string>('');
     const [ message, setMessage ] = useState<string>('');
     const [ showModal, setShowModal ] = useState<boolean>(false);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         setLoginCheck(auth.loggedIn());
@@ -111,8 +114,9 @@ const TryIt = () => {
         }
     }
 
-    const viewRecipe = async (recipe: UserRecipeData) => {
-        console.log(recipe);
+    const viewRecipe = async (recipeId: number) => {
+        console.log(recipeId);
+        navigate(`/instructions/${recipeId}`);
     }
 
     return (

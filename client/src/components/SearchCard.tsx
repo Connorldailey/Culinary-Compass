@@ -4,9 +4,10 @@ import noImage from '../assets/images/no-image-available.jpg';
 interface SearchCardProps {
     data: RecipeData[];
     addToList: (recipe: RecipeData, category: string) => void;
+    viewRecipe: (recipeId: number) => void;
 }
 
-const SearchCard: React.FC<SearchCardProps> = ({ data, addToList }) => {
+const SearchCard: React.FC<SearchCardProps> = ({ data, addToList, viewRecipe }) => {
     return (
         <>
             {data.map((recipe, index) => (
@@ -28,7 +29,7 @@ const SearchCard: React.FC<SearchCardProps> = ({ data, addToList }) => {
                             <button className='btn' onClick={() => addToList(recipe, 'favorite')} aria-label="Favorites">
                                 <i className='bi bi-heart fs-1 text-light'></i>
                             </button>
-                            <button className='btn' aria-label="View Details">
+                            <button className='btn' onClick={() => viewRecipe(recipe.id)} aria-label="View Details">
                                 <i className='bi bi-info-circle fs-1 text-light'></i>
                             </button>
                         </div>

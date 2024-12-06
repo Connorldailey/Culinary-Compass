@@ -5,7 +5,7 @@ interface TryItCardProps {
     data: UserRecipeData[];
     addToList: (recipe: UserRecipeData) => void;
     removeFromList: (recipe: UserRecipeData) => void;
-    viewRecipe: (recipe: UserRecipeData) => void;
+    viewRecipe: (recipeId: number) => void;
 }
 
 const TryItCard: React.FC<TryItCardProps> = ({ data, addToList, removeFromList, viewRecipe }) => {
@@ -30,7 +30,7 @@ const TryItCard: React.FC<TryItCardProps> = ({ data, addToList, removeFromList, 
                             <button className='btn' onClick={() => removeFromList(recipe)} aria-label="Remove">
                                 <i className='bi bi-trash fs-1 text-light'></i>
                             </button>
-                            <button className='btn' onClick={() => viewRecipe(recipe)} aria-label="View Details">
+                            <button className='btn' onClick={() => viewRecipe(recipe.id)} aria-label="View Details">
                                 <i className='bi bi-info-circle fs-1 text-light'></i>
                             </button>
                         </div>

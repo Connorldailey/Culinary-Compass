@@ -10,6 +10,7 @@ import App from './App.tsx';
 import Search from './pages/Search.tsx';
 import TryIt from './pages/TryIt.tsx';
 import Favorites from './pages/Favorites.tsx';
+import Instructions from './pages/Instructions.tsx';
 import Login from './pages/Login.tsx';
 import SignUp from './pages/SignUp.tsx';
 import ErrorPage from './pages/ErrorPage.tsx';
@@ -39,7 +40,11 @@ const router = createBrowserRouter([
       {
         path: '/signup',
         element: <SignUp />
-      }
+      },
+      {
+        path: '/instructions/:recipeId',
+        element: <Instructions />
+      },
     ]
   }
 ]);

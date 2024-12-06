@@ -1,4 +1,5 @@
 import { useEffect, useState, FormEvent, ChangeEvent } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import auth from '../utils/auth';
 
@@ -16,6 +17,8 @@ const Search = () => {
     const [ errorMessage, setErrorMessage ] = useState<string>('');
     const [ message, setMessage ] = useState<string>('');
     const [showModal, setShowModal] = useState<boolean>(false);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         setLoginCheck(auth.loggedIn());
@@ -95,6 +98,11 @@ const Search = () => {
         }
     };
 
+    const viewRecipe = (recipeId: number) => {
+        console.log(recipeId);
+        navigate(`/instructions/${recipeId}`);
+    }
+
     return (
         <>
             {
@@ -131,6 +139,7 @@ const Search = () => {
                             <SearchCard 
                                 data={results}
                                 addToList={addToList}
+                                viewRecipe={viewRecipe}
                             />
                             {showModal && <MessageModal message={message} />}
                         </div>
