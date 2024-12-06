@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import auth from '../utils/auth';
 import { getUserRecipes, deleteUserRecipe } from '../api/userRecipeAPI';
 import { UserRecipeData } from '../interfaces/UserRecipeData';
@@ -11,6 +12,8 @@ const Favorites = () => {
     const [ errorMessage, setErrorMessage ] = useState<string>('');
     const [ message, setMessage ] = useState<string>('');
     const [ showModal, setShowModal ] = useState<boolean>(false);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         setLoginCheck(auth.loggedIn());
@@ -64,8 +67,9 @@ const Favorites = () => {
         }
     }
 
-    const viewRecipe = async (recipe: UserRecipeData) => {
-        console.log(recipe);
+    const viewRecipe = async (recipeId: number) => {
+        console.log(recipeId);
+        navigate(`/instructions/${recipeId}`);
     }
 
     return (
