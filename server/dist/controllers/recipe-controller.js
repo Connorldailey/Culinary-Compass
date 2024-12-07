@@ -63,20 +63,33 @@ export const addRecipeToList = async (req, res) => {
             where: {
                 userId,
                 recipeId: recipe.id,
-                category,
             },
         });
         if (existingUserRecipe) {
-            return res.status(409).json({
-                message: `Recipe already exists in your ${category} list.`,
+            if (existingUserRecipe.category === category) {
+                return res.status(409).json({
+                    message: `Recipe already exists in your '${category}' list.`,
+                });
+            }
+            else {
+                // Update the category to the new one
+                const oldCategory = existingUserRecipe.category;
+                existingUserRecipe.category = category;
+                await existingUserRecipe.save();
+                return res.status(200).json({
+                    message: `Recipe moved from '${oldCategory}' to '${category}' list.`,
+                    data: existingUserRecipe,
+                });
+            }
+        }
+        else {
+            // Add to UserRecipe table
+            const userRecipe = await UserRecipe.create({ userId, recipeId: recipe.id, category });
+            return res.status(201).json({
+                message: 'Recipe added successfully.',
+                data: userRecipe,
             });
         }
-        // Add to UserRecipe table
-        const userRecipe = await UserRecipe.create({ userId, recipeId: recipe.id, category });
-        return res.status(201).json({
-            message: 'Recipe added successfully.',
-            data: userRecipe,
-        });
     }
     catch (error) {
         console.error(error);

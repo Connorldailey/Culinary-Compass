@@ -66,13 +66,17 @@ const Search = () => {
             // Set response status message
             const listName = category === 'favorite' ? 'favorites' : 'try it';
             let modalMessage = 'Failed to add the recipe. Please try again later.';
-            if (response && response.message === 'Recipe added successfully.') {
+            if (response && response.message.includes('added successfully')) {
                 // Successfully added to list
                 modalMessage = `Added to ${listName} list.`;
                 console.log(`Recipe added to ${listName} list.`, response);
+            } else if (response && response.message.includes('moved from')) {
+                // Recipe moved lists
+                modalMessage = `Recipe moved to ${listName} list.`;
+                console.log(`Recipe moved to ${listName} list.`, response);
             } else if (response && response.message.includes('already exists')) {
-                // Recipe already exists in the list
-                modalMessage = `Already in ${listName} list.`
+                // Recipe already in list
+                modalMessage = `Recipe already in ${listName} list.`
                 console.log(`Recipe already in ${listName} list.`, response);
             } else {
                 console.log(`Failed to add the recipe.`, response);
