@@ -40,8 +40,6 @@ html, body {
 }
 
 .card-image {
-    width: 200px;
-    height: auto;
     border-radius: 10px;
 }
 
@@ -108,6 +106,10 @@ html, body {
     .chat-container {
         max-height: 450px;
     }
+    .card-image {
+        max-width: 250px;
+        height: auto;
+    }
 }
 
 @media screen and (min-width: 992px) {
@@ -119,4 +121,8 @@ html, body {
     .chat-container {
         max-height: 600px;
     }
+}
+
+.temp {
+    border: 1px solid white;
 }

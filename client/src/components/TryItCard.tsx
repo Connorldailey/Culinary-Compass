@@ -12,22 +12,22 @@ const TryItCard: React.FC<TryItCardProps> = ({ data, addToList, removeFromList, 
     return (
         <>
             {data.map((recipe, index) => (
-                <div key={index} className='recipe-card d-flex mb-3 bg-dark text-light'>
+                <div key={index} className='recipe-card d-flex flex-column flex-md-row mb-3 bg-dark text-light'>
                     <img 
                         src={recipe.image} 
-                        className='card-image' 
+                        className='card-image img-fluid' 
                         alt={recipe.title} 
                         onError={(e) => {
                             e.currentTarget.src = noImage;
                         }}
                     />
-                    <div className='card-body p-3'>
-                        <h2 className="card-title">{recipe.title}</h2>
-                        <div className='d-flex'>
-                            <button className='btn' onClick={() => addToList(recipe)} aria-label="Try It">
+                    <div className='card-body d-flex flex-column p-3'>
+                        <h2 className="card-title text-center text-md-start p-3">{recipe.title}</h2>
+                        <div className='d-flex justify-content-center justify-content-md-around justify-content-lg-start'>
+                            <button className='btn pe-3' onClick={() => addToList(recipe)} aria-label="Try It">
                                 <i className='bi bi-heart fs-1 text-light'></i>
                             </button>
-                            <button className='btn' onClick={() => removeFromList(recipe)} aria-label="Remove">
+                            <button className='btn pe-3' onClick={() => removeFromList(recipe)} aria-label="Remove">
                                 <i className='bi bi-trash fs-1 text-light'></i>
                             </button>
                             <button className='btn' onClick={() => viewRecipe(recipe.id)} aria-label="View Details">
