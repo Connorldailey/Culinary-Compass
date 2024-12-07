@@ -77,4 +77,46 @@ html, body {
     margin: 0;
     font-size: 1.2em;
 }
-  
+
+.chat-section {
+    border-top: 1px solid black;
+    padding-top: 1rem;
+}
+
+.chat-container {
+    max-height: 300px;
+    overflow-y: auto; /* Enable scrolling for overflow content */
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.user-message {
+    max-width: 75%;
+    background-color: lightblue;
+    border-radius: 10px;
+}
+
+.assistant-message {
+    max-width: 75%;
+    background-color: lightgray;
+    border-radius: 10px;
+}
+
+@media (min-width: 768px) {
+    .chat-container {
+        max-height: 450px;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .chat-section {
+        border-top: none;
+        border-left: 1px solid black;
+        padding-top: 0;
+    }
+    .chat-container {
+        max-height: 600px;
+    }
+}

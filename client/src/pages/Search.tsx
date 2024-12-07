@@ -83,7 +83,7 @@ const Search = () => {
             setShowModal(true);
             setTimeout(() => {
                 setShowModal(false);
-            }, 3000);
+            }, 2000);
 
         } catch (error) {
             console.error('Failed to add recipe to list:', error);
@@ -94,7 +94,7 @@ const Search = () => {
             setShowModal(true);
             setTimeout(() => {
                 setShowModal(false);
-            }, 3000);
+            }, 2000);
         }
     };
 

@@ -6,16 +6,25 @@ const Navbar = () => {
     const [ loginCheck, setLoginCheck ] = useState(false);
 
     const checkLogin = () => {
-        if (auth.loggedIn()) {
-            setLoginCheck(true);
-        } else {
-            setLoginCheck(false);
-        }
+        setLoginCheck(auth.loggedIn());
     };
 
     useEffect(() => {
+        // Update login status on mount
         checkLogin();
-    }, [loginCheck])
+
+        // Add a listener to check login state whenever localStorage changes
+        const handleStorageChange = () => {
+            checkLogin();
+        };
+        
+        window.addEventListener('storage', handleStorageChange);
+
+        // Clean up the event listener on component unmount
+        return () => {
+            window.removeEventListener('storage', handleStorageChange);
+        };
+    }, []);
 
     return (
         <div className='navbar navbar-expand-lg navbar-light bg-light'>

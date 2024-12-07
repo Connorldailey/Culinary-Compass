@@ -53,7 +53,7 @@ const Favorites = () => {
 
             setTimeout(() => {
                 setShowModal(false);
-            }, 3000);
+            }, 2000);
 
             console.log('Recipe removed from favorites list.');
         } catch (error) {
@@ -63,7 +63,7 @@ const Favorites = () => {
 
             setTimeout(() => {
                 setShowModal(false);
-            }, 3000);
+            }, 2000);
         }
     }
 
