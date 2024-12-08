@@ -11,19 +11,19 @@ const FavoriteCard: React.FC<FavoriteCardProps> = ({ data, removeFromList, viewR
     return (
         <>
             {data.map((recipe, index) => (
-                <div key={index} className='recipe-card d-flex mb-3 bg-dark text-light'>
+                <div key={index} className='recipe-card d-flex flex-column flex-md-row mb-3 bg-dark text-light'>
                     <img 
                         src={recipe.image} 
-                        className='card-image' 
+                        className='card-image img-fluid' 
                         alt={recipe.title} 
                         onError={(e) => {
                             e.currentTarget.src = noImage;
                         }}
                     />
-                    <div className='card-body p-3'>
-                        <h2 className="card-title">{recipe.title}</h2>
-                        <div className='d-flex'>
-                            <button className='btn' onClick={() => removeFromList(recipe)} aria-label="Remove">
+                    <div className='card-body d-flex flex-column p-3'>
+                        <h2 className="card-title text-center text-md-start p-3">{recipe.title}</h2>
+                        <div className='d-flex justify-content-around justify-content-lg-start'>
+                            <button className='btn pe-3' onClick={() => removeFromList(recipe)} aria-label="Remove">
                                 <i className='bi bi-trash fs-1 text-light'></i>
                             </button>
                             <button className='btn' onClick={() => viewRecipe(recipe.id)} aria-label="View Details">

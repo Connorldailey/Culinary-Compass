@@ -49,14 +49,24 @@ const TryIt = () => {
 
             // Set response status message
             let modalMessage = 'Failed to add the recipe. Please try again later.';
-            if (response && response.message === 'Recipe added successfully.') {
+            if (response && response.message.includes('added successfully')) {
                 // Successfully added to list
                 modalMessage = 'Added to favorites list.';
                 console.log('Recipe added to favorites list.', response);
-            } else if (response && response.message.includes('already exists')) {
+            } else if (response && response.message.includes('moved from')) {
                 // Recipe already exists in the list
-                modalMessage = 'Already in favorites list.';
-                console.log(`Recipe already in favorites list.`, response);
+                modalMessage = `Recipe moved to favorites list.`;
+                console.log(`Recipe moved to favorites list.`, response);
+                setResults((prevResults) => {
+                    const updatedResults = prevResults.filter((result) => result.userRecipeId !== recipe.userRecipeId);
+                    
+                    // If the updated results are empty, set an error message
+                    if (updatedResults.length === 0) {
+                        setErrorMessage('No recipes to display.');
+                    }
+    
+                    return updatedResults;
+                });
             } else {
                 console.log(`Failed to add the recipe.`, response);
             }
