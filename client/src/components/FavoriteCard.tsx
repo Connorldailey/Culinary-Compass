@@ -1,10 +1,11 @@
 import { UserRecipeData } from '../interfaces/UserRecipeData';
+import { RecipeData } from '../interfaces/RecipeData';
 import noImage from '../assets/images/no-image-available.jpg';
 
 interface FavoriteCardProps {
     data: UserRecipeData[];
     removeFromList: (recipe: UserRecipeData) => void;
-    viewRecipe: (recipeId: number) => void;
+    viewRecipe: (recipeId: number, recipeData: RecipeData) => void;
 }
 
 const FavoriteCard: React.FC<FavoriteCardProps> = ({ data, removeFromList, viewRecipe }) => {
@@ -23,10 +24,10 @@ const FavoriteCard: React.FC<FavoriteCardProps> = ({ data, removeFromList, viewR
                     <div className='card-body d-flex flex-column p-3'>
                         <h2 className="card-title text-center text-md-start p-3">{recipe.title}</h2>
                         <div className='d-flex justify-content-around justify-content-lg-start'>
-                            <button className='btn pe-3' onClick={() => removeFromList(recipe)} aria-label="Remove">
+                            <button className='btn pe-3 card-button' onClick={() => removeFromList(recipe)} aria-label="Remove">
                                 <i className='bi bi-trash fs-1 text-light'></i>
                             </button>
-                            <button className='btn' onClick={() => viewRecipe(recipe.id)} aria-label="View Details">
+                            <button className='btn card-button' onClick={() => viewRecipe(recipe.id, recipe)} aria-label="View Details">
                                 <i className='bi bi-info-circle fs-1 text-light'></i>
                             </button>
                         </div>

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import auth from '../utils/auth';
 import { getUserRecipes, deleteUserRecipe } from '../api/userRecipeAPI';
 import { UserRecipeData } from '../interfaces/UserRecipeData';
+import { RecipeData } from '../interfaces/RecipeData';
 import FavoriteCard from '../components/FavoriteCard';
 import MessageModal from '../components/MessageModal';
 
@@ -67,9 +68,9 @@ const Favorites = () => {
         }
     }
 
-    const viewRecipe = async (recipeId: number) => {
+    const viewRecipe = async (recipeId: number, recipeData: RecipeData) => {
         console.log(recipeId);
-        navigate(`/instructions/${recipeId}`);
+        navigate(`/instructions/${recipeId}`, { state: { recipeName: recipeData.title, recipeImage: recipeData.image } });
     }
 
     return (
@@ -85,7 +86,7 @@ const Favorites = () => {
                     </div>
                 ) : (
                     <div className='search-content'>
-                        <h1 className='mb-3'>Favorites</h1>
+                        <h1 className='mb-3 text-center'>Favorites</h1>
                         <div className='container'>
                             <FavoriteCard 
                                 data={results}
