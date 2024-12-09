@@ -60,6 +60,8 @@ Once the application is running, you can log in using a pre-seeded user account 
 
 To use the application, visit the [live site](https://culinary-compass-8j0q.onrender.com).
 
+![Logged Out Screenshot](./client/src/assets/images/loggedOut-screenshot.png)
+
 ### How to Get Started:
 
 1. **Navigate the Site:**
@@ -90,6 +92,8 @@ To use the application, visit the [live site](https://culinary-compass-8j0q.onre
 
 4. **Responsive Experience:**
     - Culinary Compass is designed to function seamlessly on desktop, tablet, and mobile devices, ensuring a user-friendly experience no matter where you are.
+
+![Logged In Screenshot](./client/src/assets/images/loggedIn-screenshot.png)
 
 ## Credits
 
