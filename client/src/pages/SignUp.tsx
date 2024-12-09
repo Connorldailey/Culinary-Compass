@@ -24,6 +24,14 @@ const SignUp = () => {
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
+
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+ 
+        if (!signupData.email || !emailRegex.test(signupData.email)) {
+            setErrorMessage('Must use a valid email.');
+            return;
+        }
+
         try {
             const data = await signup(signupData);
             Auth.login(data.token);
