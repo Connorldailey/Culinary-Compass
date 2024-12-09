@@ -31,8 +31,9 @@ const Navbar = () => {
         <div className='navbar navbar-expand-lg navbar-light'>
             <div className='container-fluid p-3'>
                 {/* Navbar Brand */}
-                <div className='main-link btn-outline-home'>
-                 <Link className='navbar-brand' to='/'>Culinary Compass</Link>
+                <img className='brand-image me-3' src={culinaryCompass} alt='Culinary Compass' />
+                <div className='brand-link'>
+                    <Link className='navbar-brand' to='/'>Culinary Compass</Link>
                 </div>
                 {/* Toggler Button */}
                 <button 
@@ -46,9 +47,6 @@ const Navbar = () => {
                 >
                     <span className='navbar-toggler-icon'></span>
                 </button>
-                <div className='img-fluid'>
-                <img className='max-width border-radius' src={culinaryCompass} alt='Culinary Compass' />
-                </div>
                 {/* Navbar Links */}
                 <div className='collapse navbar-collapse' id='navbarSupportedContent'>
                     <ul className='navbar-nav ms-auto mb-2 mb-lg-0'>
@@ -68,19 +66,19 @@ const Navbar = () => {
                                 </>
                             ) : (
                                 <>
-                                    <li className='nav-item'>
+                                    <li className='nav-item btn-outline-login'>
                                         <Link className='nav-link btn me-2' to='/'>Search</Link>
                                     </li>
-                                    <li className='nav-item'>
+                                    <li className='nav-item btn-outline-signup'>
                                         <Link className='nav-link btn me-2' to='/try-it'>Try-It</Link>
                                     </li>
-                                    <li className='nav-item'>
+                                    <li className='nav-item btn-outline-favorites'>
                                         <Link className='nav-link btn me-2' to='/favorites'>Favorites</Link>
                                     </li>
-                                    <li className='nav-item'>
+                                    <li className='nav-item btn-outline-logout'>
                                         <a 
                                             href='#' 
-                                            className='nav-link btn btn-outline-danger me-2' 
+                                            className='nav-link btn me-2' 
                                             onClick={(e) => {
                                                 e.preventDefault();
                                                 auth.logout();

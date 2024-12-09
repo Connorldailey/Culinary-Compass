@@ -7,9 +7,12 @@
 :root {
     font-family: 'Montserrat', system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;
+    --primary-background: tomato;
     --loginbtn: #06d6a0;
     --signupbtn: #118ab2;
     --homebtn: #ffd166;
+    --logoutbtn: #f72858;
+    --favoritesbtn: #073b4c;
 }
 
 html, body {
@@ -29,6 +32,31 @@ html, body {
     display: flex;
     flex-direction: column;
     color: black;
+}
+
+/** Navbar Styles **/
+.navbar {
+    background-color: var(--primary-background);
+    border-bottom: 2px solid black;
+}
+
+.brand-image {
+    max-width: 75px;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 3px;
+    background-color: white;
+}
+
+.brand-link {
+    border-bottom: 10px solid  rgb(59, 66, 73);
+    border-radius: 10px;
+}
+
+.brand-link:hover {
+    color:white;
+    border-radius: 10px;
+    padding-bottom: 5px;
 }
 
 .login-notice-wrapper {
@@ -126,38 +154,13 @@ html, body {
     }
 }
 
-.temp {
-    border: 1px solid white;
-}
 
-.navbar {
-    background-color: tomato;
-    border-bottom: 2px solid black;
-    
-}
-
-.max-width {
-    max-width: 75px;
-    margin-left: 10px;
-}
-.border-radius {
-    border: 1px solid black;
-    padding: 3px;
-    background-color: white;
-    border-radius: 10px;
-}
 
 .btn-outline-signup :hover {
     border-radius: 10px;
     background-color: var(--signupbtn);
     color:white;
     padding: 5px;
-}
-
-.main-link {
-    border-bottom: 10px solid  rgb(59, 66, 73);
-    padding: 10px;
-    border-radius: 10px;
 }
 
 .btn-outline-login :hover {
@@ -167,9 +170,30 @@ html, body {
     padding: 5px;
 }
 
-.btn-outline-home :hover {
-    background-color: var(--homebtn);
+.btn-outline-logout :hover {
+    background-color: var(--logoutbtn);
     color:white;
     border-radius: 10px;
     padding-bottom: 5px;
+}
+
+.btn-outline-favorites :hover {
+    background-color: var(--favoritesbtn);
+    color:white;
+    border-radius: 10px;
+    padding-bottom: 5px;
+}
+
+.back-image {
+    background-image: url('./assets/images/Background-image.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh;
+    border-radius: 10px;
+}
+
+.color-white {
+    color: white;
+    padding: 15px;
 }
