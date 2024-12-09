@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import auth from '../utils/auth';
 import culinaryCompass from '../assets/images/culinaryCompass.jpg';
 
@@ -28,11 +28,12 @@ const Navbar = () => {
     }, []);
 
     return (
-        <div className='navbar navbar-expand-lg navbar-light'>
-            <div className='container-fluid p-3'>
+        <div className='navbar navbar-expand-lg'>
+            <div className='container-fluid p-3 d-flex align-items-center'>
                 {/* Navbar Brand */}
-                <div className='main-link btn-outline-home'>
-                 <Link className='navbar-brand' to='/'>Culinary Compass</Link>
+                <div className='d-flex align-items-center'>
+                    <img className='brand-image me-3' src={culinaryCompass} alt='Culinary Compass' />
+                    <NavLink className='navbar-brand brand-link p-1' to='/'>Culinary Compass</NavLink>
                 </div>
                 {/* Toggler Button */}
                 <button 
@@ -46,41 +47,34 @@ const Navbar = () => {
                 >
                     <span className='navbar-toggler-icon'></span>
                 </button>
-                <div className='img-fluid'>
-                <img className='max-width border-radius' src={culinaryCompass} alt='Culinary Compass' />
-                </div>
                 {/* Navbar Links */}
                 <div className='collapse navbar-collapse' id='navbarSupportedContent'>
-                    <ul className='navbar-nav ms-auto mb-2 mb-lg-0'>
+                    <ul className='navbar-nav ms-auto pt-3 pt-lg-0'>
                         {
                             !loginCheck ? (
                                 <>
                                     <li className='nav-item'>
-                                        <div className='btn-outline-signup'>
-                                            <Link className='nav-link btn me-2' to='/signup'>Sign Up</Link>
-                                        </div>
+                                        <NavLink className='nav-link btn me-lg-3 signup-btn' to='/signup' >Sign Up</NavLink>
                                     </li>
                                     <li className='nav-item'>
-                                        <div className='btn-outline-login'>
-                                            <Link className='nav-link btn me-2' to='/login'>Login</Link>
-                                        </div>
+                                        <NavLink className='nav-link btn login-btn' to='/login'>Login</NavLink>
                                     </li>
                                 </>
                             ) : (
                                 <>
-                                    <li className='nav-item btn-outline-login'>
-                                        <Link className='nav-link btn me-2' to='/'>Search</Link>
+                                    <li className='nav-item me-lg-3'>
+                                        <NavLink className={({ isActive }) => `nav-link btn nav-btn ${isActive ? 'nav-btn-active' : ''}`} to='/'>Search</NavLink>
                                     </li>
-                                    <li className='nav-item btn-outline-signup'>
-                                        <Link className='nav-link btn me-2' to='/try-it'>Try-It</Link>
+                                    <li className='nav-item me-lg-3'>
+                                        <NavLink className={({ isActive }) => `nav-link btn nav-btn ${isActive ? 'nav-btn-active' : ''}`} to='/try-it'>Try-It</NavLink>
                                     </li>
-                                    <li className='nav-item btn-outline-favorites'>
-                                        <Link className='nav-link btn me-2' to='/favorites'>Favorites</Link>
+                                    <li className='nav-item me-lg-3'>
+                                        <NavLink className={({ isActive }) => `nav-link btn  nav-btn ${isActive ? 'nav-btn-active' : ''}`} to='/favorites'>Favorites</NavLink>
                                     </li>
-                                    <li className='nav-item btn-outline-logout'>
+                                    <li className='nav-item'>
                                         <a 
                                             href='#' 
-                                            className='nav-link btn me-2' 
+                                            className='nav-link btn logout-btn' 
                                             onClick={(e) => {
                                                 e.preventDefault();
                                                 auth.logout();
@@ -100,3 +94,4 @@ const Navbar = () => {
 }
 
 export default Navbar;
+

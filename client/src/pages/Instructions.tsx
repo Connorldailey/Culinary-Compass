@@ -1,5 +1,6 @@
 import { useEffect, useState, FormEvent, ChangeEvent, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import parse from 'html-react-parser';
 import { InstructionData } from '../interfaces/InstructionsData';
@@ -14,6 +15,10 @@ const Instructions = () => {
     const [ chatMessages, setChatMessages ] = useState<string[]>([]);
     const [ question, setQuestion ] = useState<string>('');
     const [ loginCheck, setLoginCheck ] = useState<boolean>(false);
+
+    const { state } = useLocation();
+    const recipeName = state?.recipeName || 'Recipe';
+    const recipeImage = state?.recipeImage || '';
 
     const navigate = useNavigate();
     const chatContainerRef = useRef<HTMLDivElement>(null);
@@ -94,9 +99,9 @@ const Instructions = () => {
                     </div>
                 ) : (
                     <>
-                        <div className='d-flex justify-content-between align-items-center'>
-                            <h1 className='mb-3'>Recipe Instructions</h1>
-                            <button className='btn btn-secondary' onClick={() => navigate(-1)}>
+                        <div className='d-lg-flex justify-content-between align-items-center'>
+                            <h1 className='mb-3'>Recipe Instructions: {recipeName}</h1>
+                            <button className='btn btn-secondary mb-3' onClick={() => navigate(-1)}>
                                 Back
                             </button>
                         </div>
@@ -106,14 +111,14 @@ const Instructions = () => {
                                     <div className="alert alert-danger" role="alert">
                                         {errorMessage}
                                     </div>
-                                    <button className="btn btn-secondary mt-3" onClick={() => navigate(-1)}>
-                                        Back
-                                    </button>
                                 </>
                             ) : instructionData ? (
                                 <>
                                     <div className='row'>
-                                        <div className='instructions-section col-lg-6 pb-3'>
+                                        <div className='instructions-section col-lg-6 pb-3 pe-lg-3'>
+                                            <div className='d-flex justify-content-center justify-content-lg-start'>
+                                                <img className='img-fluid instructions-img mb-3' src={recipeImage} alt={recipeName}/>
+                                            </div>
                                             <h2>Ingredients</h2>
                                             <ul>
                                                 {instructionData.ingredients.map((ingredient, index) => (
@@ -127,7 +132,7 @@ const Instructions = () => {
                                             <h3>Servings:</h3>
                                             <p className='ps-3'>{instructionData.servings}</p>
                                         </div>
-                                        <div className='chat-section col-lg-6'>
+                                        <div className='chat-section col-lg-6 ps-lg-3'>
                                             <h2>Chat Assistant</h2>
                                             <div 
                                                 className='chat-container mb-3'

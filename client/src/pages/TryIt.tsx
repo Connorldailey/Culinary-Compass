@@ -4,7 +4,7 @@ import auth from '../utils/auth';
 import { getUserRecipes, deleteUserRecipe } from '../api/userRecipeAPI';
 import { addRecipeToList } from '../api/recipeAPI';
 import { UserRecipeData } from '../interfaces/UserRecipeData';
-import { AddRecipeData } from '../interfaces/RecipeData';
+import { RecipeData, AddRecipeData } from '../interfaces/RecipeData';
 import TryItCard from '../components/TryItCard';
 import MessageModal from '../components/MessageModal';
 
@@ -124,9 +124,9 @@ const TryIt = () => {
         }
     }
 
-    const viewRecipe = async (recipeId: number) => {
+    const viewRecipe = async (recipeId: number, recipeData: RecipeData) => {
         console.log(recipeId);
-        navigate(`/instructions/${recipeId}`);
+        navigate(`/instructions/${recipeId}`, { state: { recipeName: recipeData.title, recipeImage: recipeData.image } });
     }
 
     return (
@@ -142,7 +142,7 @@ const TryIt = () => {
                     </div>
                 ) : (
                     <div className='search-content'>
-                        <h1 className='mb-3'>Try It</h1>
+                        <h1 className='mb-3 text-center'>Try It</h1>
                         <div className='container'>
                             <TryItCard 
                                 data={results}

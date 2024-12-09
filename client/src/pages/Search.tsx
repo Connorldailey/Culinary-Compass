@@ -102,26 +102,24 @@ const Search = () => {
         }
     };
 
-    const viewRecipe = (recipeId: number) => {
-        console.log(recipeId);
-        navigate(`/instructions/${recipeId}`);
-    }
-
+    const viewRecipe = (recipeId: number, recipeData: RecipeData) => {
+        navigate(`/instructions/${recipeId}`, { state: { recipeName: recipeData.title, recipeImage: recipeData.image } });
+    };
+    
     return (
         <>
             {
                 !loginCheck? (
                     <div className='login-notice-wrapper'>
-                        <div className='login-notice'>
-                            <h1>
+                        <div className='login-notice mb-5'>
+                            <h1 className='text-light mb-5'>
                                 Sign Up or Login to start cooking!
                             </h1>
                         </div>
                     </div>
                 ) : (
-                    <div className='back-image'>
                     <div className='search-content'>
-                        <h1 className='mb-3 color-white'>Search</h1>
+                        <h1 className='mb-3 text-center'>Search</h1>
                         <div className='container mb-3'>
                             <form onSubmit={handleSubmit} className='d-flex mb-3'>
                                 <input
@@ -148,7 +146,6 @@ const Search = () => {
                             />
                             {showModal && <MessageModal message={message} />}
                         </div>
-                    </div>
                     </div>
                 )
             }
