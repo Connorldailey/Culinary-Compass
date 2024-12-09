@@ -10,6 +10,8 @@
     --loginbtn: #06d6a0;
     --signupbtn: #118ab2;
     --homebtn: #ffd166;
+    --logoutbtn: #f72858;
+    --favoritesbtn: #073b4c;
 }
 
 html, body {
@@ -169,6 +171,20 @@ html, body {
 
 .btn-outline-home :hover {
     background-color: var(--homebtn);
+    color:white;
+    border-radius: 10px;
+    padding-bottom: 5px;
+}
+
+.btn-outline-logout :hover {
+    background-color: var(--logoutbtn);
+    color:white;
+    border-radius: 10px;
+    padding-bottom: 5px;
+}
+
+.btn-outline-favorites :hover {
+    background-color: var(--favoritesbtn);
     color:white;
     border-radius: 10px;
     padding-bottom: 5px;
