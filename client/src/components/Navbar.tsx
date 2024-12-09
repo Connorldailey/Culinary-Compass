@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import auth from '../utils/auth';
+import culinaryCompass from '../assets/images/culinaryCompass.jpg';
 
 const Navbar = () => {
     const [ loginCheck, setLoginCheck ] = useState(false);
@@ -27,10 +28,12 @@ const Navbar = () => {
     }, []);
 
     return (
-        <div className='navbar navbar-expand-lg navbar-light bg-light'>
+        <div className='navbar navbar-expand-lg navbar-light'>
             <div className='container-fluid p-3'>
                 {/* Navbar Brand */}
-                <Link className='navbar-brand' to='/'>Culinary Compass</Link>
+                <div className='main-link btn-outline-home'>
+                 <Link className='navbar-brand' to='/'>Culinary Compass</Link>
+                </div>
                 {/* Toggler Button */}
                 <button 
                     className='navbar-toggler' 
@@ -43,7 +46,9 @@ const Navbar = () => {
                 >
                     <span className='navbar-toggler-icon'></span>
                 </button>
-
+                <div className='img-fluid'>
+                <img className='max-width border-radius' src={culinaryCompass} alt='Culinary Compass' />
+                </div>
                 {/* Navbar Links */}
                 <div className='collapse navbar-collapse' id='navbarSupportedContent'>
                     <ul className='navbar-nav ms-auto mb-2 mb-lg-0'>
@@ -51,10 +56,14 @@ const Navbar = () => {
                             !loginCheck ? (
                                 <>
                                     <li className='nav-item'>
-                                        <Link className='nav-link btn btn-outline-primary me-2' to='/signup'>Sign Up</Link>
+                                        <div className='btn-outline-signup'>
+                                            <Link className='nav-link btn me-2' to='/signup'>Sign Up</Link>
+                                        </div>
                                     </li>
                                     <li className='nav-item'>
-                                        <Link className='nav-link btn btn-outline-secondary' to='/login'>Login</Link>
+                                        <div className='btn-outline-login'>
+                                            <Link className='nav-link btn me-2' to='/login'>Login</Link>
+                                        </div>
                                     </li>
                                 </>
                             ) : (
