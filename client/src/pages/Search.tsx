@@ -119,8 +119,9 @@ const Search = () => {
                         </div>
                     </div>
                 ) : (
+                    <div className='back-image'>
                     <div className='search-content'>
-                        <h1 className='mb-3'>Search</h1>
+                        <h1 className='mb-3 color-white'>Search</h1>
                         <div className='container mb-3'>
                             <form onSubmit={handleSubmit} className='d-flex mb-3'>
                                 <input
@@ -147,6 +148,7 @@ const Search = () => {
                             />
                             {showModal && <MessageModal message={message} />}
                         </div>
+                    </div>
                     </div>
                 )
             }
