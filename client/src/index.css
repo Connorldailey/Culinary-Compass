@@ -7,6 +7,9 @@
 :root {
     font-family: 'Montserrat', system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;
+    --loginbtn: #06d6a0;
+    --signupbtn: #118ab2;
+    --homebtn: #ffd166;
 }
 
 html, body {
@@ -125,4 +128,48 @@ html, body {
 
 .temp {
     border: 1px solid white;
+}
+
+.navbar {
+    background-color: tomato;
+    border-bottom: 2px solid black;
+    
+}
+
+.max-width {
+    max-width: 75px;
+    margin-left: 10px;
+}
+.border-radius {
+    border: 1px solid black;
+    padding: 3px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.btn-outline-signup :hover {
+    border-radius: 10px;
+    background-color: var(--signupbtn);
+    color:white;
+    padding: 5px;
+}
+
+.main-link {
+    border-bottom: 10px solid  rgb(59, 66, 73);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.btn-outline-login :hover {
+    border-radius: 10px;
+    background-color: var(--loginbtn);
+    color:white;
+    padding: 5px;
+}
+
+.btn-outline-home :hover {
+    background-color: var(--homebtn);
+    color:white;
+    border-radius: 10px;
+    padding-bottom: 5px;
 }
